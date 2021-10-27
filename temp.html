@@ -1,0 +1,120 @@
+<html>
+
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="raphael-2.1.4.min.js"></script>
+	<script src="justgage.js"></script>
+
+	<script>
+		var accessToken = "2841e403209c6181ad9a004778129ad1d927fd9a";
+		var deviceID = "260040001747393035313137"
+		var url = "https://api.particle.io/v1/devices/" + deviceID + "/gradosC";
+
+		function callback(data, status) {
+			if (status == "success") {
+				temp = parseFloat(data.result);
+				temp = temp.toFixed(2);
+				g.refresh(temp);
+				setTimeout(getReading, 1000);
+			}
+			else {
+				alert("There was a problem");
+			}
+		}
+		function getReading() {
+			$.get(url, { access_token: accessToken }, callback);
+
+		}
+	</script>
+
+	<script>
+		var accessToken = "2841e403209c6181ad9a004778129ad1d927fd9a";
+		var deviceID = "260040001747393035313137"
+		var url1 = "https://api.particle.io/v1/devices/" + deviceID + "/gradosF";
+
+		function callback2(data, status) {
+			if (status == "success") {
+				temp = parseFloat(data.result);
+				temp = temp.toFixed(2);
+				gF.refresh(temp);
+				setTimeout(getReading1, 1000);
+			}
+			else {
+				alert("There was a problem");
+			}
+		}
+		function getReading1() {
+			$.get(url1, { access_token: accessToken }, callback2);
+
+		}
+	</script>
+
+	<script>
+		var accessToken = "2841e403209c6181ad9a004778129ad1d927fd9a";
+		var deviceID = "260040001747393035313137"
+		var url2 = "https://api.particle.io/v1/devices/" + deviceID + "/humedad";
+
+		function callback3(data, status) {
+			if (status == "success") {
+				temp = parseFloat(data.result);
+				temp = temp.toFixed(2);
+				gH.refresh(temp);
+				setTimeout(getReading2, 1000);
+			}
+			else {
+				alert("There was a problem");
+			}
+		}
+		function getReading2() {
+			$.get(url2, { access_token: accessToken }, callback3);
+
+		}
+	</script>
+</head>
+
+<body>
+	<div id="gauge" class="200x160px"></div>
+
+	<script>
+		var g = new JustGage({
+			id: "gauge",
+			value: 0,
+			min: 0,
+			max: 100,
+			title: "Centigrados"
+		});
+		getReading();
+	</script>
+
+
+
+	<div id="gauge1" class="200x160px"></div>
+	<script>
+		var gF = new JustGage({
+			id: "gauge1",
+			value: 0,
+			min: 0,
+			max: 100,
+			title: "Farenheit"
+		});
+		getReading1();
+	</script>
+
+	<div id="gauge2" class="200x160px"></div>
+	<script>
+		var gH = new JustGage({
+			id: "gauge2",
+			value: 0,
+			min: 0,
+			max: 100,
+			title: "Humedad",
+			label: "%"
+		});
+		getReading2();
+	</script>
+
+
+</body>
+
+</html>

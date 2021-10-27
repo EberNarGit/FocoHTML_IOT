@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 24</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="cabezera">
+            <img src="./image/Foof.png" alt="Foof" id="foto">
+        </div> 
+        <div class="cuerpo">
+            <h1>Encender o Apagar</h1>
+            <input type="button" onclick="switchOn()" value="ON" class="submit">
+            <input type="button" onclick="switchOff()" value="OFF" class="submit" id="one" >
+        </div>
+    </div>
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script>
+        var accessToken = "2841e403209c6181ad9a004778129ad1d927fd9a";
+        var deviceID = "260040001747393035313137";
+        var url = "https://api.particle.io/v1/devices/" + deviceID + "/led";
+  
+        function switchOn() {
+          $.post(url, { params: "on", access_token: accessToken },function(datos) {
+          if(datos.return_value == 1) {
+              var on = document.getElementById('foto').src='./image/Fon.png';
+          }
+          else{
+              alert("Error")
+          }
+        }, "json");
+        }
+        
+  
+        function switchOff() {
+          $.post(url, { params: "off", access_token: accessToken },function(datos) {
+          if(datos.return_value == 0) {
+              var on = document.getElementById('foto').src='./image/foof.png';
+          }
+          else{
+              alert("Error")
+          }
+        }, "json");
+        }
+      </script>
+</body>
+</html>
